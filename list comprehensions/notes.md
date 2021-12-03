@@ -143,3 +143,46 @@ True
 > sorted [1,3,2,4]
 False
 ```
+
+using zip to define a function that returns a list of all positions of a value in the list
+
+```haskell
+positions :: Eq a => a [a] -> [Int]
+positions x xs = [i | (x', i) <- zip xs [0..], x == x']
+```
+
+an example
+```haskell
+> positions 0 [1,0,0,1,0,1,1,0]
+[1,2,4,7]
+```
+
+# string comprehensions
+
+a string is represented internally as a list of characters
+
+`"abc" => ['a','b','c']`
+
+because strings are lists, any polymorphic function that operates on lists can be applied to strings
+
+```haskell
+> length "abcde"
+5
+
+> take 3 "abcde"
+"abc"
+
+> zip "abc" [1,2,3,4]
+[('a',1),('b',2),('c',3)]
+```
+
+list comprehensions can also be used on strings. the following is an example that counts how many times a character occurs within a string
+
+```haskell
+count :: Char -> String -> Int
+count x xs = length [x' | x' <- xs, x == x']
+
+> count 's' "mississippi"
+4
+
+```
